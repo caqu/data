@@ -122,8 +122,19 @@ module.exports = {
       return;
     }
 
-    this.options.babel = this.options.babel || {};
-    add(this.options.babel, 'plugins', require('./lib/stripped-build-plugins')(process.env.EMBER_ENV));
+    let customPlugins = require('./lib/stripped-build-plugins')(process.env.EMBER_ENV);
+
+    var babel = this.options.babel = this.options.babel || {};
+
+    babel.plugins = [].concat(
+      babel.plugins,
+      customPlugins.plugins
+    ).filter(Boolean);
+
+    babel.postTransformPlugins = [].concat(
+      babel.postTransformPlugins,
+      customPlugins.postTransformPlugins
+    ).filter(Boolean);
 
     this._hasSetupBabelOptions = true;
   },
