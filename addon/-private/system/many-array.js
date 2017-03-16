@@ -205,10 +205,10 @@ export default Ember.Object.extend(Ember.MutableArray, Ember.Evented, {
     let records;
     if (amt > 0) {
       records = this.currentState.slice(idx, idx+amt);
-      this.get('relationship').removeRecords(records);
+      this.get('relationship').removeInternalModels(records);
     }
     if (objects) {
-      this.get('relationship').addRecords(objects.map(obj => obj._internalModel), idx);
+      this.get('relationship').addInternalModels(objects.map(obj => obj._internalModel), idx);
     }
   },
 
