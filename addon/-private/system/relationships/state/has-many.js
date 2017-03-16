@@ -91,7 +91,7 @@ export default class ManyRelationship extends Relationship {
     }
     super.addInternalModel(internalModel, idx);
     // make lazy later
-    this.manyArray.internalAddRecords([internalModel], idx);
+    this.manyArray._addInternalModels([internalModel], idx);
   }
 
   removeCanonicalInternalModelFromOwn(internalModel, idx) {
@@ -125,7 +125,7 @@ export default class ManyRelationship extends Relationship {
       //TODO(Igor) not used currently, fix
       manyArray.currentState.removeAt(idx);
     } else {
-      manyArray.internalRemoveRecords([internalModel]);
+      manyArray._removeInternalModels([internalModel]);
     }
   }
 
